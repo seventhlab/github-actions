@@ -139,6 +139,8 @@ Releases are automatically created when changes are merged to `main`:
 3. Release notes are generated from commit messages
 4. Git tags are created automatically
 
+**Note:** If you encounter permission issues with releases, see the [Release Setup Guide](./docs/RELEASE.md) for configuration instructions.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
