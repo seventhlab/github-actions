@@ -1,0 +1,37 @@
+{
+  "name": "github-actions",
+  "version": "0.0.0-development",
+  "description": "A curated collection of reusable GitHub Actions for common CI/CD workflows",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seventhlab/github-actions.git"
+  },
+  "keywords": [
+    "github-actions",
+    "ci-cd",
+    "automation",
+    "workflow"
+  ],
+  "author": "SeventhLab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seventhlab/github-actions/issues"
+  },
+  "homepage": "https://github.com/seventhlab/github-actions#readme",
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "semantic-release": "^23.0.0"
+  },
+  "scripts": {
+    "semantic-release": "semantic-release",
+    "lint": "echo 'Use make lint or pre-commit run --all-files'",
+    "test": "echo 'Use make test'"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  }
+}

@@ -6,7 +6,8 @@ inputs:
     description: The commit SHA to wait for
     required: true
   jobName:
-    description: The job name that is running this action, exactly as it appears in the workflow file (e.g. "Wait for CI")
+    description: |
+      The job name that is running this action, exactly as it appears in the workflow file (e.g. "Wait for CI")
     required: true
   excludeJobPatterns:
     description: Comma-separated list of job name patterns to ignore (supports regex)
