@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2](https://github.com/seventhlab/github-actions/compare/v1.0.1...v1.0.2) (2025-11-25)
+
+
+### 🐛 Bug Fixes
+
+* use specific PAT ([#4](https://github.com/seventhlab/github-actions/issues/4)) ([b8b4eaf](https://github.com/seventhlab/github-actions/commit/b8b4eafe30bb398a0776a4daf6031b47bc89490a))
+
 ## [1.0.1](https://github.com/seventhlab/github-actions/compare/v1.0.0...v1.0.1) (2025-11-25)
 
 ### 🐛 Bug Fixes
