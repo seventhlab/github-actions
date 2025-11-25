@@ -7,6 +7,7 @@ This folder contains additional documentation for the GitHub Actions repository.
 - **[SETUP.md](./SETUP.md)** - Quick setup guide for new contributors
 - **[QUICKREF.md](./QUICKREF.md)** - Quick reference card with common commands and workflows
 - **[LABELS.md](./LABELS.md)** - GitHub labels configuration and setup guide
+- **[RELEASE.md](./RELEASE.md)** - Release workflow setup and troubleshooting
 - **[SECURITY.md](./SECURITY.md)** - Security policy and vulnerability reporting
 
 ## Main Documentation

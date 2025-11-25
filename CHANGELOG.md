@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.1](https://github.com/seventhlab/github-actions/compare/v1.0.0...v1.0.1) (2025-11-25)
 
-
 ### 🐛 Bug Fixes
 
 * missing permissions ([#3](https://github.com/seventhlab/github-actions/issues/3)) ([bf88f58](https://github.com/seventhlab/github-actions/commit/bf88f58c9bfe98c311611ba20fb3814f8ee9d3ce))
