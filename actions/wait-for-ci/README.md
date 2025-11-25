@@ -1,6 +1,8 @@
 # Wait for CI
 
-A GitHub Action that waits for all CI checks to complete on a given commit before proceeding. This is particularly useful for merge queues, pull requests, or any workflow where you need to ensure all checks have passed before continuing with subsequent steps.
+A GitHub Action that waits for all CI checks to complete on a given commit before proceeding.
+This is particularly useful for merge queues, pull requests, or any workflow where you need to
+ensure all checks have passed before continuing with subsequent steps.
 
 ## Description
 

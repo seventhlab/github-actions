@@ -1,0 +1,34 @@
+# Editor and OS files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+.venv
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Pre-commit
+.pre-commit-cache/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Development
+.dev/
+*.log

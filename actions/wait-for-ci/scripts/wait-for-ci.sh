@@ -11,8 +11,6 @@ YELLOW='\e[0;33m'
 BLUE='\e[0;34m'
 PURPLE='\e[0;35m'
 CYAN='\e[0;36m'
-LIGHT_GREEN='\e[0;92m'
-LIGHT_CYAN='\e[0;96m'
 RESET='\e[0m'
 
 script_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")
@@ -23,7 +21,7 @@ get_checks_status() {
 
   local response
   local exit_code
-  
+
   # Capture gh api response and exit code
   if ! response=$(gh api "/repos/${repo}/commits/${commit_sha}/check-runs" 2>&1); then
     exit_code=$?
@@ -32,21 +30,21 @@ get_checks_status() {
     printf "${RED}Response:${RESET} %s\n" "${response}" >&2
     exit 1
   fi
-  
+
   # Validate response is valid JSON
   if ! jq empty <<<"${response}" 2>/dev/null; then
     printf "\n${RED}Error: Invalid JSON response from GitHub API.${RESET}\n" >&2
     printf "${RED}Response:${RESET} %s\n" "${response}" >&2
     exit 1
   fi
-  
+
   # Check if response contains check_runs array
   if ! jq -e '.check_runs' <<<"${response}" >/dev/null 2>&1; then
     printf "\n${RED}Error: Response does not contain 'check_runs' field.${RESET}\n" >&2
     printf "${RED}Response:${RESET} %s\n" "${response}" >&2
     exit 1
   fi
-  
+
   # Parse check runs with error handling
   readarray -t commit_checks < <(
     jq -r '.check_runs[] | {
@@ -125,7 +123,7 @@ get_combined_status() {
 # ------------------------
 display_usage() {
 	cat <<-EOF
-Script that waits for CI to complete successfully on a given pull request or merge queue. It first waits for 10 seconds 
+Script that waits for CI to complete successfully on a given pull request or merge queue. It first waits for 10 seconds
 before starting to poll. It will time out after a given time (default: 30 minutes).
 
 Requirements:
@@ -182,6 +180,11 @@ while getopts 'hc:r:j:t:i:f:e:' opt; do
   h)
     display_usage
     exit 0
+    ;;
+  *)
+    printf "\n${RED}Error: Invalid option.${RESET}\n" >&2
+    display_usage >&2
+    exit 2
     ;;
   esac
 done

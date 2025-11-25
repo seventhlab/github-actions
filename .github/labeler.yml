@@ -1,0 +1,87 @@
+# Configuration for actions/labeler - https://github.com/actions/labeler
+# Labels PRs based on the paths of files being changed
+
+# Features
+feature:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'actions/**/*'
+          - '**/*.feature'
+
+# Bug fixes
+bug:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/fix/**/*'
+  - head-branch:
+      - '^fix\/'
+      - '^bugfix\/'
+      - '^hotfix\/'
+
+# Documentation
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - 'docs/**/*'
+  - head-branch:
+      - '^docs\/'
+
+# CI/CD changes
+ci/cd:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**/*'
+          - '.github/actions/**/*'
+  - head-branch:
+      - '^ci\/'
+
+# Maintenance/Chores
+maintenance:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.gitignore'
+          - '.pre-commit-config.yaml'
+          - '.releaserc.json'
+          - 'Makefile'
+          - 'package.json'
+  - head-branch:
+      - '^chore\/'
+
+# Dependencies
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - 'package-lock.json'
+          - '**/requirements*.txt'
+          - 'Pipfile'
+          - 'Pipfile.lock'
+
+# Testing
+testing:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*test*.sh'
+          - '**/*spec*.sh'
+          - 'tests/**/*'
+  - head-branch:
+      - '^test\/'
+
+# Performance
+performance:
+  - head-branch:
+      - '^perf\/'
+
+# Refactoring
+refactor:
+  - head-branch:
+      - '^refactor\/'
+
+# Breaking changes
+breaking-change:
+  - head-branch:
+      - '!$'
+  - body-contains:
+      - 'BREAKING CHANGE'
+      - 'BREAKING-CHANGE'
