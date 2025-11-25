@@ -85,4 +85,3 @@ breaking-change:
   - body-contains:
       - 'BREAKING CHANGE'
       - 'BREAKING-CHANGE'
-
