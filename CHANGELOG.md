@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1](https://github.com/seventhlab/github-actions/compare/v1.0.0...v1.0.1) (2026-03-01)
+
+
+### 🔧 Chores
+
+* improve logging of polled status ([#7](https://github.com/seventhlab/github-actions/issues/7)) ([04230c5](https://github.com/seventhlab/github-actions/commit/04230c5dd5cbd6f7ba5c61af0130bbe37db170d4))
+
 ## 1.0.0 (2025-11-26)
 
 ### ✨ Features
