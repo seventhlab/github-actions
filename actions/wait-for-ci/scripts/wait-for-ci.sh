@@ -19,39 +19,14 @@ get_checks_status() {
   local commit_sha=$1
   local repo=$2
 
-  local response
-  local exit_code
-
-  # Capture gh api response and exit code
-  if ! response=$(gh api "/repos/${repo}/commits/${commit_sha}/check-runs" 2>&1); then
-    exit_code=$?
-    printf "\n${RED}Error: Failed to fetch check runs from GitHub API.${RESET}\n" >&2
-    printf "${RED}Exit code:${RESET} %s\n" "${exit_code}" >&2
-    printf "${RED}Response:${RESET} %s\n" "${response}" >&2
-    exit 1
-  fi
-
-  # Validate response is valid JSON
-  if ! jq empty <<<"${response}" 2>/dev/null; then
-    printf "\n${RED}Error: Invalid JSON response from GitHub API.${RESET}\n" >&2
-    printf "${RED}Response:${RESET} %s\n" "${response}" >&2
-    exit 1
-  fi
-
-  # Check if response contains check_runs array
-  if ! jq -e '.check_runs' <<<"${response}" >/dev/null 2>&1; then
-    printf "\n${RED}Error: Response does not contain 'check_runs' field.${RESET}\n" >&2
-    printf "${RED}Response:${RESET} %s\n" "${response}" >&2
-    exit 1
-  fi
-
-  # Parse check runs with error handling
   readarray -t commit_checks < <(
-    jq -r '.check_runs[] | {
-      name: .name,
-      bucket: (.conclusion // .status),
-      url: .html_url
-    }' <<<"${response}"
+    gh api "/repos/${repo}/commits/${commit_sha}/check-runs" \
+      --paginate \
+      --jq '.check_runs[] | {
+        name: .name,
+        bucket: (.conclusion // .status),
+        link: .html_url
+      }'
   )
 
   check_runs=("${commit_checks[@]}")
@@ -85,27 +60,32 @@ get_combined_status() {
   for check in "${check_runs[@]}"; do
     name=$(jq -r '.name' <<<"${check}")
     status=$(jq -r '.bucket' <<<"${check}")
-    printf "${BLUE}Check:${RESET} %s ->" "${name}"
+    status_icon="✅"
+    if [ "${status}" == "fail" ] || [ "${status}" == "cancel" ] || [ "${status}" == "timed_out" ] || [ "${status}" == "failure" ] || [ "${status}" == "cancelled" ] || [ "${status}" == "failed" ]; then
+      status_icon="❌"
+    fi
+    if [ "${status}" == "pending" ] || [ "${status}" == "in_progress" ] || [ "${status}" == "queued" ]; then
+      status_icon="⏳"
+    fi
+    printf "${BLUE}%s Check:${RESET} %s\n" "${status_icon}" "${name}"
 
     if [ "${name}" == "${self_job_name}" ]; then
-      printf "${CYAN} ⏩ Skipping self job '%s'...${RESET}\n" "${name}"
+      printf " -->${CYAN} Skipping self job '%s'...${RESET}\n" "${name}"
       continue
     fi
 
     if is_excluded "${name}" "${exclude_patterns}"; then
-      printf "${YELLOW} ⏩ Skipping check '%s' as it matches an exclude pattern...${RESET}\n" "${name}"
+      printf " -->${YELLOW} Skipping check '%s' as it matches an exclude pattern...${RESET}\n" "${name}"
       continue
     fi
 
-    if [[ "${status}" == "failure" || "${status}" == "failed" || "${status}" == "cancelled" || "${status}" == "timed_out" ]]; then
+    if [ "${status}" == "fail" ] || [ "${status}" == "cancel" ] || [ "${status}" == "timed_out" ] || [ "${status}" == "failure" ] || [ "${status}" == "cancelled" ] || [ "${status}" == "failed" ]; then
       failed_checks=$((failed_checks + 1))
-      printf " ${RED}❌ Status:${RESET} %s\n" "${status}"
       if [ "${fail_fast}" == "true" ]; then
         break
       fi
     fi
-    if [[ "${status}" == "pending" || "${status}" == "in_progress" || "${status}" == "queued" ]]; then
-      printf " ${YELLOW}⏳ Status:${RESET} %s\n" "${status}"
+    if [ "${status}" == "pending" ] || [ "${status}" == "in_progress" ] || [ "${status}" == "queued" ]; then
       pending_checks=$((pending_checks + 1))
     fi
   done
@@ -182,7 +162,7 @@ while getopts 'hc:r:j:t:i:f:e:' opt; do
     exit 0
     ;;
   *)
-    printf "\n${RED}Error: Invalid option.${RESET}\n" >&2
+    printf "\n${RED}Error: Invalid option '-%s'.${RESET}\n" "${OPTARG}" >&2
     display_usage >&2
     exit 2
     ;;
