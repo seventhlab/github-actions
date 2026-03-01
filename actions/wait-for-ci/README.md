@@ -57,7 +57,6 @@ jobs:
         with:
           commitSha: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
           jobName: "Wait for CI"
-          timeOutInMinutes: 120
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
