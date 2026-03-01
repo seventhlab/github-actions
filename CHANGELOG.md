@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2](https://github.com/seventhlab/github-actions/compare/v1.0.1...v1.0.2) (2026-03-01)
+
+
+### 🐛 Bug Fixes
+
+* allow execute script ([#8](https://github.com/seventhlab/github-actions/issues/8)) ([e6fd028](https://github.com/seventhlab/github-actions/commit/e6fd028a0d171d4f991b8292de57fa95b2376827))
+
 ## [1.0.1](https://github.com/seventhlab/github-actions/compare/v1.0.0...v1.0.1) (2026-03-01)
 
 ### 🔧 Chores
