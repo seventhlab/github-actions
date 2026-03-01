@@ -11,8 +11,6 @@ YELLOW='\e[0;33m'
 BLUE='\e[0;34m'
 PURPLE='\e[0;35m'
 CYAN='\e[0;36m'
-LIGHT_GREEN='\e[0;92m'
-LIGHT_CYAN='\e[0;96m'
 RESET='\e[0m'
 
 script_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")
@@ -105,7 +103,7 @@ get_combined_status() {
 # ------------------------
 display_usage() {
 	cat <<-EOF
-Script that waits for CI to complete successfully on a given pull request or merge queue. It first waits for 10 seconds 
+Script that waits for CI to complete successfully on a given pull request or merge queue. It first waits for 10 seconds
 before starting to poll. It will time out after a given time (default: 30 minutes).
 
 Requirements:
@@ -162,6 +160,11 @@ while getopts 'hc:r:j:t:i:f:e:' opt; do
   h)
     display_usage
     exit 0
+    ;;
+  *)
+    printf "\n${RED}Error: Invalid option '-%s'.${RESET}\n" "${OPTARG}" >&2
+    display_usage >&2
+    exit 2
     ;;
   esac
 done
