@@ -2,7 +2,55 @@
 
 A curated collection of reusable GitHub Actions for common CI/CD workflows and automation tasks.
 
+This repository also centralizes versioning for frequently used baseline actions (checkout, Node setup, and Go setup) so maintenance updates are done in one place and consumed consistently across workflows.
+
 ## 📦 Available Actions
+
+### [Checkout](./actions/checkout/)
+
+Internal wrapper around `actions/checkout` for a single, centrally managed checkout version.
+
+**Quick Example:**
+```yaml
+- name: Checkout code
+   uses: seventhlab/github-actions/actions/checkout@v1
+```
+
+### [Setup Node.js](./actions/setup-node/)
+
+Sets up Node.js and pnpm with repository-standard defaults and optional GitHub Packages npm registry support.
+
+**Inputs:**
+- `node-version` (default: `24`)
+- `pnpm-version` (default: `10`)
+- `use-github-npm-registry` (default: `true`)
+
+**Quick Example:**
+```yaml
+- name: Setup Node.js
+   uses: seventhlab/github-actions/actions/setup-node@v1
+   with:
+      node-version: '24'
+      pnpm-version: '10'
+      use-github-npm-registry: 'true'
+   env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### [Setup Go](./actions/setup-go/)
+
+Sets up Go with cache enabled using a centrally managed `actions/setup-go` version.
+
+**Inputs:**
+- `go-version` (default: `1.26.1`)
+
+**Quick Example:**
+```yaml
+- name: Setup Go
+   uses: seventhlab/github-actions/actions/setup-go@v1
+   with:
+      go-version: '1.26.1'
+```
 
 ### [Wait for CI](./actions/wait-for-ci/)
 
