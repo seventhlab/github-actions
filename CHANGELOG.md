@@ -4,11 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [1.1.0](https://github.com/seventhlab/github-actions/compare/v1.0.2...v1.1.0) (2026-04-09)
 
-
 ### ✨ Features
 
 * add internal basic actions ([#9](https://github.com/seventhlab/github-actions/issues/9)) ([b3e8425](https://github.com/seventhlab/github-actions/commit/b3e842571f6deb6137af5e12f7b6fae6fd6dd6fc))
-
 
 ### 🐛 Bug Fixes
 
