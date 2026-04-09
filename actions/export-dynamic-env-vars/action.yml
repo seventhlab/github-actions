@@ -1,0 +1,31 @@
+---
+name: Export Dynamic Env Vars
+description: Export dynamic environment variables from a JSON object.
+inputs:
+  env-vars-json:
+    description: 'JSON object of environment variables to set.'
+    required: false
+    default: '{}'
+
+runs:
+  using: composite
+  steps:
+    - name: Export dynamic env vars
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        env_json='${{ inputs.env-vars-json }}'
+
+        echo "$env_json" | jq -e 'if type == "object" then . else error("must be a JSON object") end' >/dev/null
+
+        while IFS='=' read -r key value; do
+          if [[ ! "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+            echo "Invalid env var name: $key" >&2
+            exit 1
+          fi
+
+          printf '%s=%s\n' "$key" "$value" >> "$GITHUB_ENV"
+        done < <(
+          echo "$env_json" | jq -r 'to_entries[] | "\(.key)=\(.value|tostring)"'
+        )
