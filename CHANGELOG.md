@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/seventhlab/github-actions/compare/v1.1.0...v1.2.0) (2026-04-09)
+
+
+### ✨ Features
+
+* add new export environment variables action ([#11](https://github.com/seventhlab/github-actions/issues/11)) ([643c805](https://github.com/seventhlab/github-actions/commit/643c805830c3deaa53cf5c21184dd8804165f977))
+
 ## [1.1.0](https://github.com/seventhlab/github-actions/compare/v1.0.2...v1.1.0) (2026-04-09)
 
 ### ✨ Features
