@@ -52,6 +52,24 @@ Sets up Go with cache enabled using a centrally managed `actions/setup-go` versi
       go-version: '1.26.1'
 ```
 
+### [Export Dynamic Env Vars](./actions/export-dynamic-env-vars/)
+
+Exports environment variables from a JSON object into `$GITHUB_ENV` using a centrally maintained implementation.
+
+**Inputs:**
+- `env-vars-json` (default: `{}`)
+
+**Quick Example:**
+```yaml
+- name: Export dynamic environment variables
+   uses: seventhlab/github-actions/actions/export-dynamic-env-vars@v1
+   with:
+      env-vars-json: '{"APP_NAME":"my-service","APP_ENV":"staging"}'
+
+- name: Use exported variable
+   run: echo "Deploying ${APP_NAME} to ${APP_ENV}"
+```
+
 ### [Wait for CI](./actions/wait-for-ci/)
 
 Waits for all CI checks to complete on a given commit before proceeding. Ideal for merge queues, pull requests, and workflow synchronization.
