@@ -6,15 +6,19 @@ inputs:
   ref:
     description: 'The branch, tag or SHA to checkout. Default: the commit that triggered the workflow.'
     required: false
-    default: ""
+    default: ${{ github.sha }}
   path:
     description: 'The directory to checkout the repository into. Default: the root of the workspace.'
     required: false
     default: "."
+  repository:
+    description: 'The repository to checkout. Default: the repository that triggered the workflow.'
+    required: false
+    default: ${{ github.repository }}
   token:
     description: 'GitHub token to use for authentication. Default: GITHUB_TOKEN secret.'
     required: false
-    default: ""
+    default: ${{ github.token }}
   fetch-depth:
     description: 'Number of commits to fetch. Set to 0 to fetch all history for all branches and tags.'
     required: false
@@ -28,5 +32,6 @@ runs:
       with:
         ref: ${{ inputs.ref }}
         path: ${{ inputs.path }}
+        repository: ${{ inputs.repository }}
         fetch-depth: ${{ inputs.fetch-depth }}
         token: ${{ inputs.token }}
