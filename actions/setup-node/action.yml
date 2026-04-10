@@ -12,23 +12,22 @@ inputs:
     default: '24'
   use-github-npm-registry:
     description: |-
-      Whether to use GitHub npm registry. Default is true. This will require `NODE_AUTH_TOKEN` secret to be set as an
+      Whether to use GitHub npm registry. Default is false. This will require `NODE_AUTH_TOKEN` secret to be set as an
       environment variable.
     required: false
-    default: 'true'
+    default: 'false'
 
 runs:
   using: composite
   steps:
     - name: Setup pnpm
       uses: pnpm/action-setup@v5
-      if: ${{ inputs.use-node }}
       with:
         version: ${{ inputs.pnpm-version }}
 
     - name: Use Node.js
       uses: actions/setup-node@v6.3.0
-      if: ${{ inputs.use-node && inputs.use-github-npm-registry }}
+      if: ${{ inputs.use-github-npm-registry }}
       with:
         node-version: ${{ inputs.node-version }}
         registry-url: https://npm.pkg.github.com/
@@ -36,7 +35,7 @@ runs:
 
     - name: Use Node.js
       uses: actions/setup-node@v6.3.0
-      if: ${{ inputs.use-node && !inputs.use-github-npm-registry }}
+      if: ${{ !inputs.use-github-npm-registry }}
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
