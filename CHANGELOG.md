@@ -15,13 +15,11 @@ All notable changes to this project will be documented in this file.
 
 ## [1.2.3](https://github.com/seventhlab/github-actions/compare/v1.2.2...v1.2.3) (2026-04-10)
 
-
 ### 🔧 Chores
 
 * **ci)(deps:** bump actions/cache from 4 to 5 ([#16](https://github.com/seventhlab/github-actions/issues/16)) ([a3279d1](https://github.com/seventhlab/github-actions/commit/a3279d10fda45875510174d3078714cb4eb50707))
 
 ## [1.2.2](https://github.com/seventhlab/github-actions/compare/v1.2.1...v1.2.2) (2026-04-10)
-
 
 ### 🔧 Chores
 
