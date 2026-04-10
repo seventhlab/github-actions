@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](https://github.com/seventhlab/github-actions/compare/v1.3.0...v1.4.0) (2026-04-10)
+
+### ✨ Features
+
+* add support for some basic inputs for checkout action ([#25](https://github.com/seventhlab/github-actions/issues/25)) ([ee9f4c7](https://github.com/seventhlab/github-actions/commit/ee9f4c777b46d5b1f455425f4ac6a70af3bd8e00))
+* checkout inputs support ([#26](https://github.com/seventhlab/github-actions/issues/26)) ([2bbf419](https://github.com/seventhlab/github-actions/commit/2bbf4191b4e5b8a1707157fbb9cee3628dcadc63))
+
 ## [1.3.0](https://github.com/seventhlab/github-actions/compare/v1.2.5...v1.3.0) (2026-04-10)
 
 ### ✨ Features
