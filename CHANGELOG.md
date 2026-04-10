@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/seventhlab/github-actions/compare/v1.2.5...v1.3.0) (2026-04-10)
+
+### ✨ Features
+
+* add PR title conventional commits compliant check ([#24](https://github.com/seventhlab/github-actions/issues/24)) ([621ee89](https://github.com/seventhlab/github-actions/commit/621ee89a060da3a8d05c2f42df01fc1ed4d69828))
+
 ## [1.2.5](https://github.com/seventhlab/github-actions/compare/v1.2.4...v1.2.5) (2026-04-10)
 
 ### 🐛 Bug Fixes
