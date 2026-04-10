@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.4](https://github.com/seventhlab/github-actions/compare/v1.2.3...v1.2.4) (2026-04-10)
+
+### 🔧 Chores
+
+* **deps)(deps-dev:** bump @semantic-release/exec from 6.0.3 to 7.1.0 ([#20](https://github.com/seventhlab/github-actions/issues/20)) ([b9ea360](https://github.com/seventhlab/github-actions/commit/b9ea36067a91268568c5d41079ba5d12d0912148))
+* **deps)(deps-dev:** bump conventional-changelog-conventionalcommits ([#21](https://github.com/seventhlab/github-actions/issues/21)) ([de36ecf](https://github.com/seventhlab/github-actions/commit/de36ecf70934c85460184d0876743121c3a8497a))
+* **deps)(deps-dev:** bump semantic-release from 23.1.1 to 25.0.3 ([#22](https://github.com/seventhlab/github-actions/issues/22)) ([efe7b1b](https://github.com/seventhlab/github-actions/commit/efe7b1b99c83f4022a78e97b0cd3b7454541e6da))
+* **pre-commit)(deps:** bump https://github.com/adrienverge/yamllint ([#17](https://github.com/seventhlab/github-actions/issues/17)) ([5849842](https://github.com/seventhlab/github-actions/commit/5849842f4bcde0f24fc281857e3644247c528bfb))
+* **pre-commit)(deps:** bump https://github.com/pre-commit/pre-commit-hooks ([#19](https://github.com/seventhlab/github-actions/issues/19)) ([977c01c](https://github.com/seventhlab/github-actions/commit/977c01c7727d6b38d4360b5ab9f0742cba8afa44))
+* **pre-commit)(deps:** bump https://github.com/shellcheck-py/shellcheck-py ([#14](https://github.com/seventhlab/github-actions/issues/14)) ([b56196e](https://github.com/seventhlab/github-actions/commit/b56196ee564d4606fcdadde31675af63f58e8b18))
+
 ## [1.2.3](https://github.com/seventhlab/github-actions/compare/v1.2.2...v1.2.3) (2026-04-10)
 
 
