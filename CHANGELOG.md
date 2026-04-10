@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file.
 
 ## [1.2.1](https://github.com/seventhlab/github-actions/compare/v1.2.0...v1.2.1) (2026-04-10)
 
-
 ### 🐛 Bug Fixes
 
 * remove wrong condition ([#12](https://github.com/seventhlab/github-actions/issues/12)) ([2c6577c](https://github.com/seventhlab/github-actions/commit/2c6577cc8b520cb72e9a0eee6248bfce39ea4598))
