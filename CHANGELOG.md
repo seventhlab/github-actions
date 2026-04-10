@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2](https://github.com/seventhlab/github-actions/compare/v1.2.1...v1.2.2) (2026-04-10)
+
+
+### 🔧 Chores
+
+* **ci)(deps:** bump dependabot/fetch-metadata from 2 to 3 ([#15](https://github.com/seventhlab/github-actions/issues/15)) ([6604891](https://github.com/seventhlab/github-actions/commit/660489119adb8a29bf4104fc477222cd25b107d9))
+
 ## [1.2.1](https://github.com/seventhlab/github-actions/compare/v1.2.0...v1.2.1) (2026-04-10)
 
 ### 🐛 Bug Fixes
