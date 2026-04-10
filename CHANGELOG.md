@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.5](https://github.com/seventhlab/github-actions/compare/v1.2.4...v1.2.5) (2026-04-10)
+
+### 🐛 Bug Fixes
+
+* remove body width ruile for commit lint ([#23](https://github.com/seventhlab/github-actions/issues/23)) ([6ef4eba](https://github.com/seventhlab/github-actions/commit/6ef4eba7def384d2ac0c2ee47781ba505dd2b686))
+
 ## [1.2.4](https://github.com/seventhlab/github-actions/compare/v1.2.3...v1.2.4) (2026-04-10)
 
 ### 🔧 Chores
