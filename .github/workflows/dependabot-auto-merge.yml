@@ -1,0 +1,124 @@
+---
+name: Dependabot Auto-Merge
+
+on:
+  # Run on schedule every day at 04:00 UTC (1 hour after dependabot runs)
+  schedule:
+    - cron: '0 4 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run when Dependabot opens a PR
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  auto-merge:
+    name: Auto-merge Dependabot PRs
+    runs-on: ubuntu-latest
+    # Only run for Dependabot PRs
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Get Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Enable auto-merge for Dependabot PRs
+        # Auto-merge patch and minor updates automatically
+        # Major updates require manual review
+        if: |
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor')
+        run: |
+          gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Approve Dependabot PR
+        # Approve the PR if it's a minor or patch update
+        if: |
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor')
+        run: |
+          gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on major update PRs
+        # Add a comment on major updates to notify maintainers
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: |
+          gh pr comment "$PR_URL" \
+            --body "🔴 **Major version update detected!** This PR requires manual review before merging."
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  check-pending-prs:
+    name: Check and Merge Pending PRs
+    runs-on: ubuntu-latest
+    # Run on schedule or manual trigger, but not on PR events
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: List and process Dependabot PRs
+        run: |
+          echo "Checking for pending Dependabot PRs..."
+
+          # Get all open PRs from Dependabot
+          prs=$(gh pr list --author "dependabot[bot]" --state open --json number,url,title --limit 100)
+
+          if [ "$(echo "$prs" | jq 'length')" -eq 0 ]; then
+            echo "No pending Dependabot PRs found."
+            exit 0
+          fi
+
+          echo "Found $(echo "$prs" | jq 'length') Dependabot PR(s)"
+
+          # Process each PR
+          echo "$prs" | jq -c '.[]' | while read -r pr; do
+            pr_number=$(echo "$pr" | jq -r '.number')
+            pr_url=$(echo "$pr" | jq -r '.url')
+            pr_title=$(echo "$pr" | jq -r '.title')
+
+            echo ""
+            echo "Processing PR #$pr_number: $pr_title"
+
+            # Check if PR is already approved and passing checks
+            checks_status=$(gh pr checks "$pr_number" --json state --jq '.[].state' | grep -v "SUCCESS" || true)
+
+            if [ -z "$checks_status" ]; then
+              echo "✅ All checks passed for PR #$pr_number"
+
+              # Check if already has auto-merge enabled
+              auto_merge=$(gh pr view "$pr_number" --json autoMergeRequest --jq '.autoMergeRequest')
+
+              if [ "$auto_merge" == "null" ]; then
+                echo "Enabling auto-merge for PR #$pr_number"
+                gh pr merge --auto --squash "$pr_number" || echo "Failed to enable auto-merge"
+              else
+                echo "Auto-merge already enabled for PR #$pr_number"
+              fi
+            else
+              echo "⏳ Waiting for checks to pass on PR #$pr_number"
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
