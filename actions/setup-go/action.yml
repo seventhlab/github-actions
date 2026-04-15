@@ -8,8 +8,9 @@ inputs:
     default: '1.26.1'
   use-github-go-repository:
     description: |-
-      Whether to use GitHub Go repository to fetch Go modules. Default is false. This will require `GITHUB_TOKEN` to be
-      set as an environment variable. This will also enable caching of Go modules using GitHub Actions cache.
+      Whether to use GitHub Go repository to fetch private Go modules. Default is false. This will require
+      `GITHUB_TOKEN` to be set as an environment variable. This will also enable caching of Go modules using GitHub
+      Actions cache.
     required: false
     default: 'false'
 
@@ -26,6 +27,6 @@ runs:
       if: ${{ inputs.use-github-go-repository }}
       shell: bash
       run: |
-        git config --global url.ssh://github.com/.insteadOf https://github.com/
+        git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
         echo "GOPRIVATE=github.com/${{ github.repository }}" >> $GITHUB_ENV
         echo "GONOPROXY=github.com/${{ github.repository }}" >> $GITHUB_ENV
