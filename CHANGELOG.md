@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0](https://github.com/seventhlab/github-actions/compare/v1.4.0...v1.5.0) (2026-04-15)
+
+### ✨ Features
+
+* add go private support ([#28](https://github.com/seventhlab/github-actions/issues/28)) ([a795680](https://github.com/seventhlab/github-actions/commit/a7956800c38521c960689e0e130272efa77d076a))
+
+### 🔧 Chores
+
+* **ci)(deps:** bump seventhlab/github-actions ([#27](https://github.com/seventhlab/github-actions/issues/27)) ([be2788e](https://github.com/seventhlab/github-actions/commit/be2788ec57817a9cf667678ba3e63b3c545526ab))
+
 ## [1.4.0](https://github.com/seventhlab/github-actions/compare/v1.3.0...v1.4.0) (2026-04-10)
 
 ### ✨ Features
