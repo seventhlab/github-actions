@@ -6,6 +6,12 @@ inputs:
     description: 'Version of Go to use. Default is 1.26.1.'
     required: false
     default: '1.26.1'
+  use-github-go-repository:
+    description: |-
+      Whether to use GitHub Go repository to fetch Go modules. Default is false. This will require `GITHUB_TOKEN` to be
+      set as an environment variable. This will also enable caching of Go modules using GitHub Actions cache.
+    required: false
+    default: 'false'
 
 runs:
   using: composite
@@ -15,3 +21,11 @@ runs:
       with:
         go-version: ${{ inputs.go-version }}
         cache: 'true'
+
+    - name: Configure Go to use GitHub Go repository
+      if: ${{ inputs.use-github-go-repository }}
+      shell: bash
+      run: |
+        git config --global url.ssh://github.com/.insteadOf https://github.com/
+        echo "GOPRIVATE=github.com/${{ github.repository }}" >> $GITHUB_ENV
+        echo "GONOPROXY=github.com/${{ github.repository }}" >> $GITHUB_ENV
