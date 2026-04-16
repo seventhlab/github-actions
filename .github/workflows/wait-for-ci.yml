@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for CI
-        uses: seventhlab/github-actions/actions/wait-for-ci@v1.4.0
+        uses: seventhlab/github-actions/actions/wait-for-ci@v1.5.0
         with:
           commitSha: ${{ github.event.pull_request.head.sha }}
           jobName: "Wait for CI"
