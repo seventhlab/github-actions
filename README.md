@@ -93,6 +93,24 @@ Waits for all CI checks to complete on a given commit before proceeding. Ideal f
     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+### [Notify Slack](./actions/notify-slack/)
+
+Reports a failed workflow run to a Slack incoming webhook. Built for `workflow_run` listeners, so a channel can carry deploy failures without carrying every green run.
+
+**Key Features:**
+- Posts only on `failure`, `timed_out` or `startup_failure`; silent on success, `cancelled` and `skipped`
+- Names the job that actually failed, not just the workflow
+- Replays a past run by id, which is the only way to rehearse a `workflow_run` listener
+- Needs `actions: read` and nothing else — no checkout, no third-party action
+
+**Quick Example:**
+```yaml
+- name: Report the failure
+  uses: seventhlab/github-actions/actions/notify-slack@v1.6.0
+  with:
+    webhookUrl: ${{ secrets.SLACK_DEPLOY_FAILURES_WEBHOOK }}
+```
+
 ## 🚀 Getting Started
 
 ### Using Actions in Your Workflows

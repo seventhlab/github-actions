@@ -1,0 +1,30 @@
+---
+name: Notify Slack
+description: Report a failed workflow run to a Slack incoming webhook
+
+inputs:
+  webhookUrl:
+    description: Slack incoming webhook URL. It is bound to one channel when it is created.
+    required: true
+  runId:
+    description: The workflow run to report. Defaults to the run that raised the `workflow_run` event.
+    required: false
+    default: ""
+  githubToken:
+    description: "Token used to read the run and its jobs. Needs `actions: read` permission."
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Report the run
+      shell: bash
+      # Through the environment, never the `run:` body: a `$(…)` in a branch name would execute here.
+      env:
+        WEBHOOK_URL: ${{ inputs.webhookUrl }}
+        RUN_ID: ${{ inputs.runId || github.event.workflow_run.id }}
+        CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        REPOSITORY: ${{ github.repository }}
+        GH_TOKEN: ${{ inputs.githubToken }}
+      run: ${{ github.action_path }}/scripts/notify-slack.sh
