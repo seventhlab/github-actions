@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0](https://github.com/seventhlab/github-actions/compare/v1.5.0...v1.6.0) (2026-09-22)
+
+### ✨ Features
+
+* add a notify-slack action for failed workflow runs ([#49](https://github.com/seventhlab/github-actions/issues/49)) ([af757b7](https://github.com/seventhlab/github-actions/commit/af757b76d8c18a41c871c473758c614cf31f7c31))
+
+### 🔧 Chores
+
+* **ci)(deps:** bump seventhlab/github-actions ([#29](https://github.com/seventhlab/github-actions/issues/29)) ([5796c07](https://github.com/seventhlab/github-actions/commit/5796c07bc1573c124fc03d73cdfe7e3559dd9194))
+* **deps)(deps-dev:** bump semantic-release ([#30](https://github.com/seventhlab/github-actions/issues/30)) ([1879f40](https://github.com/seventhlab/github-actions/commit/1879f40eefbe0a70b135475db72c913ca5c39b05))
+* **deps)(deps-dev:** bump semantic-release ([#36](https://github.com/seventhlab/github-actions/issues/36)) ([407dbc1](https://github.com/seventhlab/github-actions/commit/407dbc142dba0007f263af24a1dee243e29b2839))
+* **deps)(deps-dev:** bump semantic-release ([#37](https://github.com/seventhlab/github-actions/issues/37)) ([d0d92c1](https://github.com/seventhlab/github-actions/commit/d0d92c1d3bb04f56ee076573cc51b727416b7287))
+* **deps)(deps-dev:** bump semantic-release ([#40](https://github.com/seventhlab/github-actions/issues/40)) ([5273a75](https://github.com/seventhlab/github-actions/commit/5273a755151a1c2d284a68bc56d027b83b940edb))
+* **deps)(deps-dev:** bump semantic-release ([#46](https://github.com/seventhlab/github-actions/issues/46)) ([0be3684](https://github.com/seventhlab/github-actions/commit/0be36849484413a6cc0f9d8b3993efdc801bd22a))
+
 ## [1.5.0](https://github.com/seventhlab/github-actions/compare/v1.4.0...v1.5.0) (2026-04-15)
 
 ### ✨ Features
